@@ -1,0 +1,36 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/db_event_booking_system_dev
+    username: postgres
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        enable_lazy_load_no_trans: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  profiles:
+    active: development
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    defaultModelsExpandedDepth: -1
+    docExpansion: none
+    tagsSorter: alpha
+    operationsSorter: alpha
+
+logging:
+  level:
+    com:
+      sinaukoding:
+        martinms:
+          event_booking_system: DEBUG

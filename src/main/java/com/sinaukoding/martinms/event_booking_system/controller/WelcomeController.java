@@ -1,0 +1,22 @@
+package com.sinaukoding.martinms.event_booking_system.controller;
+
+import com.sinaukoding.martinms.event_booking_system.model.response.BaseResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@Tag(name = "Welcome Controller")
+public class WelcomeController {
+
+    @GetMapping
+    @Operation(
+            summary = "Selamat Datang",
+            description = "Selamat datang di API Service aplikasi Event Booking System"
+    )
+    public BaseResponse<?> welcome() {
+        return BaseResponse.ok("Selamat datang di Event Booking System");
+    }
+
+}
