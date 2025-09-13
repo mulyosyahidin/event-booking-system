@@ -34,3 +34,6 @@ logging:
       sinaukoding:
         martinms:
           event_booking_system: DEBUG
+
+jwt:
+  secret: "6rlm7BsPmlF9YXeROQTM3Yeuqv97YRU1DYiVhGrPOCI="
