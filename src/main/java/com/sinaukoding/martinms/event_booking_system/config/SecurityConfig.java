@@ -33,6 +33,7 @@ public class SecurityConfig {
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/auth/login").permitAll()
                         .requestMatchers("/auth/register").permitAll()
+                        .requestMatchers("/files/view").permitAll()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(ex -> ex

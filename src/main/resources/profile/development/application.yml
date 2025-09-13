@@ -18,6 +18,10 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   profiles:
     active: development
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 
 springdoc:
   api-docs:
@@ -37,3 +41,6 @@ logging:
 
 jwt:
   secret: "6rlm7BsPmlF9YXeROQTM3Yeuqv97YRU1DYiVhGrPOCI="
+
+app:
+  upload-directory: uploads
