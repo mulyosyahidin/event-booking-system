@@ -10,7 +10,6 @@ import com.sinaukoding.martinms.event_booking_system.model.response.BaseResponse
 import com.sinaukoding.martinms.event_booking_system.service.IAuthService;
 import com.sinaukoding.martinms.event_booking_system.service.IUserService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -30,21 +29,7 @@ public class AuthController {
     @PostMapping("login")
     @Operation(
             summary = "Login",
-            description = "Login dengan username dan password",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Berhasil login, mengembalikan data user dan token akses"
-                    ),
-                    @ApiResponse(
-                            responseCode = "401",
-                            description = "Username atau password salah"
-                    ),
-                    @ApiResponse(
-                            responseCode = "422",
-                            description = "Validasi gagal"
-                    )
-            }
+            description = "Login dengan username dan password"
     )
     public BaseResponse<?> login(@RequestBody LoginRequestRecord requestRecord) {
         return BaseResponse.ok("Berhasil login dengan username dan password", authService.loginWithUsernameAndPassword(requestRecord));
@@ -73,21 +58,7 @@ public class AuthController {
     @PostMapping("register")
     @Operation(
             summary = "Register",
-            description = "Mendaftarkan user baru",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Berhasil mendaftarkan user baru"
-                    ),
-                    @ApiResponse(
-                            responseCode = "409",
-                            description = "Email / username sudah terdaftar"
-                    ),
-                    @ApiResponse(
-                            responseCode = "422",
-                            description = "Validasi gagal"
-                    )
-            }
+            description = "Mendaftarkan user baru"
     )
     public BaseResponse<SimpleMap> register(@RequestBody RegisterRequestRecord requestRecord) {
         User registeredUser = userService.registerNewUser(requestRecord, UserRole.USER);

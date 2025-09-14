@@ -97,7 +97,7 @@ public class UserServiceImpl implements IUserService {
         validatorService.validator(request);
 
         User user = userRepository.findByIdAndStatus(id, Status.AKTIF)
-                .orElseThrow(() -> new ResourceNotFoundException("Event tidak ditemukan"));
+                .orElseThrow(() -> new ResourceNotFoundException("User tidak ditemukan"));
 
         if (!user.getUsername().equals(request.username()) &&
                 userRepository.existsByUsername(request.username())) {

@@ -1,11 +1,11 @@
 package com.sinaukoding.martinms.event_booking_system.model.request.admin.event;
 
-import com.sinaukoding.martinms.event_booking_system.model.enums.KategoriEvent;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
 
-import java.time.LocalDateTime;
-
-public record EventRequest(
+public record UpdateEventRequestRecord(
 
         @NotBlank(message = "Nama event tidak boleh kosong")
         @Size(max = 150, message = "Nama event maksimal 150 karakter")
@@ -28,10 +28,6 @@ public record EventRequest(
 
         @NotNull(message = "Waktu selesai tidak boleh kosong")
         String waktuSelesai,
-
-        @NotNull(message = "Kuota tidak boleh kosong")
-        @Positive(message = "Kuota harus lebih dari 0")
-        Integer kuota,
 
         @NotNull(message = "Harga tidak boleh kosong")
         @PositiveOrZero(message = "Harga tidak boleh negatif")

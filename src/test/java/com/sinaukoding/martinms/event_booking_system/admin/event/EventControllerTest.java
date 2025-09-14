@@ -4,7 +4,8 @@ import com.sinaukoding.martinms.event_booking_system.config.GlobalAdviceConfig;
 import com.sinaukoding.martinms.event_booking_system.config.exception.ResourceNotFoundException;
 import com.sinaukoding.martinms.event_booking_system.controller.admin.EventController;
 import com.sinaukoding.martinms.event_booking_system.model.app.SimpleMap;
-import com.sinaukoding.martinms.event_booking_system.model.request.admin.event.EventRequest;
+import com.sinaukoding.martinms.event_booking_system.model.request.admin.event.CreateEventRequestRecord;
+import com.sinaukoding.martinms.event_booking_system.model.request.admin.event.UpdateEventRequestRecord;
 import com.sinaukoding.martinms.event_booking_system.model.response.BaseResponse;
 import com.sinaukoding.martinms.event_booking_system.service.IEventService;
 import org.junit.jupiter.api.BeforeEach;
@@ -70,7 +71,7 @@ class EventControllerTest {
     @Test
     @WithMockUser(authorities = "ADMIN")
     void create_Success() {
-        EventRequest request = new EventRequest(
+        CreateEventRequestRecord request = new CreateEventRequestRecord(
                 "Seminar Green Tech Future",
                 "Teknologi hijau",
                 "event/2025/09/14/img.png",
@@ -82,7 +83,7 @@ class EventControllerTest {
                 150000.0
         );
 
-        when(eventService.create(any(EventRequest.class))).thenReturn(event);
+        when(eventService.create(any(CreateEventRequestRecord.class))).thenReturn(event);
 
         BaseResponse<?> response = eventController.create(request);
 
@@ -90,7 +91,7 @@ class EventControllerTest {
         assertEquals("Berhasil membuat event baru", response.getMessage());
         assertNotNull(response.getData());
 
-        verify(eventService).create(any(EventRequest.class));
+        verify(eventService).create(any(CreateEventRequestRecord.class));
     }
 
     @Test
@@ -110,7 +111,7 @@ class EventControllerTest {
     @Test
     @WithMockUser(authorities = "ADMIN")
     void update_Success() {
-        EventRequest request = new EventRequest(
+        UpdateEventRequestRecord request = new UpdateEventRequestRecord(
                 "Seminar Updated",
                 "Update konten",
                 "event/2025/09/14/img2.png",
@@ -118,11 +119,10 @@ class EventControllerTest {
                 "Bandung",
                 "2025-09-20 08:00",
                 "2025-09-20 16:00",
-                80,
                 120000.0
         );
 
-        when(eventService.update(eq("1"), any(EventRequest.class))).thenReturn(event);
+        when(eventService.update(eq("1"), any(UpdateEventRequestRecord.class))).thenReturn(event);
 
         BaseResponse<?> response = eventController.update("1", request);
 
@@ -130,7 +130,7 @@ class EventControllerTest {
         assertEquals("Berhasil memperbarui data event", response.getMessage());
         assertNotNull(response.getData());
 
-        verify(eventService).update(eq("1"), any(EventRequest.class));
+        verify(eventService).update(eq("1"), any(UpdateEventRequestRecord.class));
     }
 
     @Test

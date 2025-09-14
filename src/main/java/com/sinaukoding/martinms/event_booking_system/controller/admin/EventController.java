@@ -1,7 +1,8 @@
 package com.sinaukoding.martinms.event_booking_system.controller.admin;
 
 import com.sinaukoding.martinms.event_booking_system.model.app.SimpleMap;
-import com.sinaukoding.martinms.event_booking_system.model.request.admin.event.EventRequest;
+import com.sinaukoding.martinms.event_booking_system.model.request.admin.event.CreateEventRequestRecord;
+import com.sinaukoding.martinms.event_booking_system.model.request.admin.event.UpdateEventRequestRecord;
 import com.sinaukoding.martinms.event_booking_system.model.response.BaseResponse;
 import com.sinaukoding.martinms.event_booking_system.service.IEventService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -41,10 +42,8 @@ public class EventController {
             summary = "Buat event",
             description = "Membuat event baru"
     )
-    public BaseResponse<SimpleMap> create(@RequestBody EventRequest request) {
-        SimpleMap event = eventService.create(request);
-
-        return BaseResponse.ok("Berhasil membuat event baru", event);
+    public BaseResponse<SimpleMap> create(@RequestBody CreateEventRequestRecord request) {
+        return BaseResponse.ok("Berhasil membuat event baru", eventService.create(request));
     }
 
     @GetMapping("{id}")
@@ -63,7 +62,7 @@ public class EventController {
             summary = "Update event",
             description = "Mengubah data event berdasarkan id"
     )
-    public BaseResponse<?> update(@PathVariable String id, @RequestBody EventRequest request) {
+    public BaseResponse<?> update(@PathVariable String id, @RequestBody UpdateEventRequestRecord request) {
         return BaseResponse.ok("Berhasil memperbarui data event", eventService.update(id, request));
     }
 

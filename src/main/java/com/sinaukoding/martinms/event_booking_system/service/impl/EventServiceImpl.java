@@ -12,7 +12,8 @@ import com.sinaukoding.martinms.event_booking_system.model.app.AppPage;
 import com.sinaukoding.martinms.event_booking_system.model.app.SimpleMap;
 import com.sinaukoding.martinms.event_booking_system.model.enums.KategoriEvent;
 import com.sinaukoding.martinms.event_booking_system.model.enums.Status;
-import com.sinaukoding.martinms.event_booking_system.model.request.admin.event.EventRequest;
+import com.sinaukoding.martinms.event_booking_system.model.request.admin.event.CreateEventRequestRecord;
+import com.sinaukoding.martinms.event_booking_system.model.request.admin.event.UpdateEventRequestRecord;
 import com.sinaukoding.martinms.event_booking_system.repository.EventRepository;
 import com.sinaukoding.martinms.event_booking_system.service.IEventService;
 import com.sinaukoding.martinms.event_booking_system.service.app.IValidatorService;
@@ -34,7 +35,7 @@ public class EventServiceImpl implements IEventService {
     private final IValidatorService validatorService;
 
     @Override
-    public SimpleMap create(EventRequest request) {
+    public SimpleMap create(CreateEventRequestRecord request) {
         validatorService.validator(request);
 
         if (eventRepository.existsByNama(request.nama())) {
@@ -48,6 +49,7 @@ public class EventServiceImpl implements IEventService {
         }
 
         Event event = eventRepository.save(eventMapper.requestToEntity(request, Status.AKTIF));
+        event.setSisaKuota(request.kuota());
 
         return eventMapper.entityToSimpleMap(event);
     }
@@ -73,7 +75,7 @@ public class EventServiceImpl implements IEventService {
     }
 
     @Override
-    public SimpleMap update(String id, EventRequest request) {
+    public SimpleMap update(String id, UpdateEventRequestRecord request) {
         validatorService.validator(request);
 
         Event event = eventRepository.findByIdAndStatus(id, Status.AKTIF)
@@ -99,7 +101,6 @@ public class EventServiceImpl implements IEventService {
         event.setLokasi(request.lokasi());
         event.setWaktuMulai(LocalDateTime.parse(request.waktuMulai(), formatter));
         event.setWaktuSelesai(LocalDateTime.parse(request.waktuSelesai(), formatter));
-        event.setKuota(request.kuota());
         event.setHarga(request.harga());
 
         Event updatedEvent = eventRepository.save(event);

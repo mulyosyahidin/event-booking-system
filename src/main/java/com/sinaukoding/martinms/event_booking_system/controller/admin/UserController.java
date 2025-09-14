@@ -1,7 +1,6 @@
 package com.sinaukoding.martinms.event_booking_system.controller.admin;
 
 import com.sinaukoding.martinms.event_booking_system.model.app.SimpleMap;
-import com.sinaukoding.martinms.event_booking_system.model.request.admin.event.EventRequest;
 import com.sinaukoding.martinms.event_booking_system.model.request.admin.user.UpdateUserRequestRecord;
 import com.sinaukoding.martinms.event_booking_system.model.response.BaseResponse;
 import com.sinaukoding.martinms.event_booking_system.service.IUserService;

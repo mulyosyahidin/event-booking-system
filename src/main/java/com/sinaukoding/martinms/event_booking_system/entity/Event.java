@@ -56,6 +56,9 @@ public class Event extends BaseEntity {
     private Integer kuota;
 
     @Column(nullable = false)
+    private Integer sisaKuota;
+
+    @Column(nullable = false)
     private Double harga;
 
     @Enumerated(EnumType.STRING)

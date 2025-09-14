@@ -2,7 +2,6 @@ package com.sinaukoding.martinms.event_booking_system.service.app.impl;
 
 import com.sinaukoding.martinms.event_booking_system.model.app.SimpleMap;
 import com.sinaukoding.martinms.event_booking_system.model.enums.TipeUpload;
-import com.sinaukoding.martinms.event_booking_system.model.response.BaseResponse;
 import com.sinaukoding.martinms.event_booking_system.service.app.IFileService;
 import com.sinaukoding.martinms.event_booking_system.util.Checks;
 import com.sinaukoding.martinms.event_booking_system.util.DateUtil;
