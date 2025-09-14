@@ -18,4 +18,6 @@ public interface BookingRepository extends JpaRepository<Booking, String>, JpaSp
     Page<Booking> findAllByUser(User user, Pageable pageable);
 
     Optional<Booking> findByKodeBooking(String kodeBooking);
+
+    Page<Booking> findAllByEvent(Event event, Pageable pageable);
 }

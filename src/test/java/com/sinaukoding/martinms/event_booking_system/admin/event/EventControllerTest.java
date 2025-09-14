@@ -7,6 +7,7 @@ import com.sinaukoding.martinms.event_booking_system.model.app.SimpleMap;
 import com.sinaukoding.martinms.event_booking_system.model.request.admin.event.CreateEventRequestRecord;
 import com.sinaukoding.martinms.event_booking_system.model.request.admin.event.UpdateEventRequestRecord;
 import com.sinaukoding.martinms.event_booking_system.model.response.BaseResponse;
+import com.sinaukoding.martinms.event_booking_system.service.IBookingService;
 import com.sinaukoding.martinms.event_booking_system.service.IEventService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,6 +35,9 @@ class EventControllerTest {
 
     @InjectMocks
     private EventController eventController;
+
+    @Mock
+    private IBookingService bookingService;
 
     @Mock
     private IEventService eventService;
@@ -156,5 +160,28 @@ class EventControllerTest {
 
         verify(eventService).findById("404");
     }
+
+    @Test
+    @WithMockUser(authorities = "ADMIN")
+    void findEventBookings_Success() {
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<SimpleMap> bookingsPage = new PageImpl<>(List.of(
+                new SimpleMap() {{
+                    put("id", "B001");
+                    put("kodeBooking", "BOOK123");
+                }}
+        ));
+
+        when(bookingService.findAllByEventId("1", pageable)).thenReturn(bookingsPage);
+
+        BaseResponse<?> response = eventController.findEventBookings(pageable, "1");
+
+        assertNotNull(response);
+        assertEquals("Berhasil mendapatkan data booking event", response.getMessage());
+        assertNotNull(response.getData());
+
+        verify(bookingService).findAllByEventId("1", pageable);
+    }
+
 
 }

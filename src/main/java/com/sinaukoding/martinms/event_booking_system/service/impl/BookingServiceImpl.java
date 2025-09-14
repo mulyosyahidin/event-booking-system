@@ -1,5 +1,6 @@
 package com.sinaukoding.martinms.event_booking_system.service.impl;
 
+import com.sinaukoding.martinms.event_booking_system.builder.CustomBuilder;
 import com.sinaukoding.martinms.event_booking_system.config.exception.ConflictResourceException;
 import com.sinaukoding.martinms.event_booking_system.config.exception.ResourceNotFoundException;
 import com.sinaukoding.martinms.event_booking_system.entity.Booking;
@@ -11,6 +12,7 @@ import com.sinaukoding.martinms.event_booking_system.model.app.AppPage;
 import com.sinaukoding.martinms.event_booking_system.model.app.SimpleMap;
 import com.sinaukoding.martinms.event_booking_system.model.enums.BookingStatus;
 import com.sinaukoding.martinms.event_booking_system.model.enums.Status;
+import com.sinaukoding.martinms.event_booking_system.model.request.admin.booking.AdminBookingFilterRecord;
 import com.sinaukoding.martinms.event_booking_system.model.request.user.booking.CreateBookingRequestRecord;
 import com.sinaukoding.martinms.event_booking_system.repository.BookingRepository;
 import com.sinaukoding.martinms.event_booking_system.repository.EventRepository;
@@ -18,6 +20,7 @@ import com.sinaukoding.martinms.event_booking_system.repository.UserRepository;
 import com.sinaukoding.martinms.event_booking_system.service.IBookingService;
 import com.sinaukoding.martinms.event_booking_system.service.IPembayaranService;
 import com.sinaukoding.martinms.event_booking_system.service.app.IValidatorService;
+import com.sinaukoding.martinms.event_booking_system.util.FilterUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -100,6 +103,37 @@ public class BookingServiceImpl implements IBookingService {
     public void updateStatus(Booking booking, BookingStatus bookingStatus) {
         booking.setStatus(bookingStatus);
         bookingRepository.save(booking);
+    }
+
+    @Override
+    public Page<SimpleMap> findAllByEventId(String id, Pageable pageable) {
+        Event event = eventRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Event tidak ditemukan"));
+
+        Page<Booking> bookings = bookingRepository.findAllByEvent(event, pageable);
+        List<SimpleMap> listData = bookings.stream().map(bookingMapper::entityToSimpleMap).toList();
+
+        return AppPage.create(listData, pageable, bookings.getTotalElements());
+    }
+
+    @Override
+    public Page<SimpleMap> findAll(AdminBookingFilterRecord filterRecord, Pageable pageable) {
+        CustomBuilder<Booking> builder = new CustomBuilder<>();
+
+        FilterUtil.builderConditionNotBlankLike("status", filterRecord.status(), builder);
+
+        Page<Booking> bookings = bookingRepository.findAll(builder.build(), pageable);
+        List<SimpleMap> listData = bookings.stream().map(bookingMapper::entityToSimpleMap).toList();
+
+        return AppPage.create(listData, pageable, bookings.getTotalElements());
+    }
+
+    @Override
+    public SimpleMap findById(String id) {
+        Booking booking = bookingRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Data booking tidak ditemukan"));
+
+        return bookingMapper.entityToSimpleMap(booking);
     }
 
 }

@@ -44,6 +44,7 @@ public class EventMapper {
         simpleMap.add("kategori", event.getKategori());
         simpleMap.add("harga", event.getHarga());
         simpleMap.add("kuota", event.getKuota());
+        simpleMap.add("sisaKuota", event.getSisaKuota());
         simpleMap.add("waktuMulai", DateUtil.formatLocalDateTimeToString(event.getWaktuMulai()));
         simpleMap.add("waktuSelesai", DateUtil.formatLocalDateTimeToString(event.getWaktuSelesai()));
 

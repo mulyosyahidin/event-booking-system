@@ -4,6 +4,7 @@ import com.sinaukoding.martinms.event_booking_system.model.app.SimpleMap;
 import com.sinaukoding.martinms.event_booking_system.model.request.admin.event.CreateEventRequestRecord;
 import com.sinaukoding.martinms.event_booking_system.model.request.admin.event.UpdateEventRequestRecord;
 import com.sinaukoding.martinms.event_booking_system.model.response.BaseResponse;
+import com.sinaukoding.martinms.event_booking_system.service.IBookingService;
 import com.sinaukoding.martinms.event_booking_system.service.IEventService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "[Admin] Events")
 public class EventController {
 
+    private final IBookingService bookingService;
     private final IEventService eventService;
 
     @GetMapping
@@ -56,7 +58,7 @@ public class EventController {
         return BaseResponse.ok("Berhasil mendapatkan data event", eventService.findById(id));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
     @Operation(
             summary = "Update event",
@@ -66,7 +68,7 @@ public class EventController {
         return BaseResponse.ok("Berhasil memperbarui data event", eventService.update(id, request));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
     @Operation(
             summary = "Hapus event",
@@ -76,6 +78,18 @@ public class EventController {
         eventService.destroy(id);
 
         return BaseResponse.ok("Berhasil menghapus event", null);
+    }
+
+    @GetMapping("{id}/bookings")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @Operation(
+            summary = "Booking event",
+            description = "Mendapatkan semua data booking event"
+    )
+    public BaseResponse<?> findEventBookings(@PageableDefault(direction = Sort.Direction.ASC, sort = "modifiedDate")
+                                             @Parameter(hidden = true) Pageable pageable,
+                                             @PathVariable String id) {
+        return BaseResponse.ok("Berhasil mendapatkan data booking event", bookingService.findAllByEventId(id, pageable));
     }
 
 }

@@ -1,5 +1,6 @@
 package com.sinaukoding.martinms.event_booking_system.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sinaukoding.martinms.event_booking_system.model.enums.KategoriEvent;
 import com.sinaukoding.martinms.event_booking_system.model.enums.Status;
 import jakarta.persistence.*;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -64,5 +66,9 @@ public class Event extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private Status status;
+
+    @OneToMany(mappedBy = "event")
+    @JsonIgnore
+    private List<Booking> bookings;
 
 }
