@@ -54,3 +54,8 @@ User dapat mendaftar melalui _endpoint_ `/auth/register`.
 - [Postman - Collection](./postman/Collection.json)
 - [Environment - Dev](./postman/Environment%20-%20Dev.json)
 - [Environment - Staging](./postman/Environment%20-%20Staging.json)
+
+## Flowchart
+- [Login](./flowchart/Login.jpg)
+- [Admin - Tambah Event](./flowchart/Admin%20-%20Tambah%20Event.jpg)
+- [User - Booking](./flowchart/User%20-%20Booking.jpg)

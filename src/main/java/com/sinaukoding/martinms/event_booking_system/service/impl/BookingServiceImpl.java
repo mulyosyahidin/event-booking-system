@@ -3,6 +3,7 @@ package com.sinaukoding.martinms.event_booking_system.service.impl;
 import com.sinaukoding.martinms.event_booking_system.builder.CustomBuilder;
 import com.sinaukoding.martinms.event_booking_system.config.exception.ConflictResourceException;
 import com.sinaukoding.martinms.event_booking_system.config.exception.ResourceNotFoundException;
+import com.sinaukoding.martinms.event_booking_system.config.exception.ValidationErrorException;
 import com.sinaukoding.martinms.event_booking_system.entity.Booking;
 import com.sinaukoding.martinms.event_booking_system.entity.Event;
 import com.sinaukoding.martinms.event_booking_system.entity.Pembayaran;
@@ -27,6 +28,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -83,6 +85,10 @@ public class BookingServiceImpl implements IBookingService {
         // cek apakah user ini sudah pernah booking event ini atau belum
         if (bookingRepository.existsByUserAndEvent(user, event)) {
             throw new ConflictResourceException("Anda sudah pernah melakukan booking pada event ini");
+        }
+
+        if (event.getWaktuMulai().isBefore(LocalDateTime.now())) {
+            throw new ConflictResourceException("Pendaftaran sudah ditutup");
         }
 
         if (event.getSisaKuota() <= 0) {
