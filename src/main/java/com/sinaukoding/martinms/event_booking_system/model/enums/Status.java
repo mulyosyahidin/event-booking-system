@@ -1,0 +1,17 @@
+package com.sinaukoding.martinms.event_booking_system.model.enums;
+
+import lombok.Getter;
+
+@Getter
+public enum Status {
+
+    AKTIF("Aktif"),
+    TIDAK_AKTIF("Tidak Aktif");
+
+    private final String label;
+
+    Status(String label) {
+        this.label = label;
+    }
+
+}

@@ -1,0 +1,55 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/db_event_booking_system_dev
+    username: postgres
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        enable_lazy_load_no_trans: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  profiles:
+    active: development
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    defaultModelsExpandedDepth: -1
+    docExpansion: none
+    tagsSorter: alpha
+    operationsSorter: alpha
+
+logging:
+  level:
+    com:
+      sinaukoding:
+        martinms:
+          event_booking_system: DEBUG
+
+jwt:
+  secret: "6rlm7BsPmlF9YXeROQTM3Yeuqv97YRU1DYiVhGrPOCI="
+
+app:
+  upload-directory: uploads
+  base_url: ${BASE_URL:http://localhost:8080}
+
+payment:
+  fee: 5000
+  midtrans:
+    merchant_id: ${MIDTRANS_MERCHANT_ID:}
+    client_key: ${MIDTRANS_CLIENT_KEY:}
+    server_key: ${MIDTRANS_SERVER_KEY:}
+    production: ${MIDTRANS_PRODUCTION:false}
