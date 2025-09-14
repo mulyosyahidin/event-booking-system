@@ -61,6 +61,7 @@ class LoginTest {
         when(passwordEncoder.matches(PASSWORD, user.getPassword())).thenReturn(true);
         when(jwtUtil.generateToken(USERNAME)).thenReturn(TOKEN);
         when(userMapper.entityToSimpleMap(any())).thenReturn(new SimpleMap());
+
         SimpleMap result = authService.loginWithUsernameAndPassword(loginRequest);
         assertNotNull(result);
         assertEquals(TOKEN, result.get("token"));

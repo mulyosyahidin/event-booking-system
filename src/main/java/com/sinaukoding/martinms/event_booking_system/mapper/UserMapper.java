@@ -3,11 +3,9 @@ package com.sinaukoding.martinms.event_booking_system.mapper;
 import com.sinaukoding.martinms.event_booking_system.entity.User;
 import com.sinaukoding.martinms.event_booking_system.model.app.SimpleMap;
 import com.sinaukoding.martinms.event_booking_system.util.DateUtil;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class UserMapper {
 
     public SimpleMap entityToSimpleMap(User user) {
