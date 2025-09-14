@@ -77,11 +77,12 @@ public class UserServiceImpl implements IUserService {
         CustomBuilder<User> builder = new CustomBuilder<>();
 
         builder.with(SearchCriteria.of("status", CustomSpecification.OPERATION_EQUAL, Status.AKTIF));
+        builder.with(SearchCriteria.of("role", CustomSpecification.OPERATION_EQUAL, UserRole.USER));
 
-        Page<User> events = userRepository.findAll(builder.build(), pageable);
-        List<SimpleMap> listData = events.stream().map(userMapper::entityToSimpleMap).toList();
+        Page<User> users = userRepository.findAll(builder.build(), pageable);
+        List<SimpleMap> listData = users.stream().map(userMapper::entityToSimpleMap).toList();
 
-        return AppPage.create(listData, pageable, events.getTotalElements());
+        return AppPage.create(listData, pageable, users.getTotalElements());
     }
 
     @Override
@@ -130,6 +131,17 @@ public class UserServiceImpl implements IUserService {
 
         user.setStatus(Status.TIDAK_AKTIF);
         userRepository.save(user);
+    }
+
+    @Override
+    public SimpleMap getOverview() {
+        SimpleMap data = new SimpleMap();
+
+        data.add("aktif", userRepository.countByStatusAndRole(Status.AKTIF, UserRole.USER));
+        data.add("tidakAktif", userRepository.countByStatusAndRole(Status.TIDAK_AKTIF, UserRole.USER));
+        data.add("semua", userRepository.countByRole(UserRole.USER));
+
+        return data;
     }
 
 }

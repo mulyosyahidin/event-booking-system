@@ -27,7 +27,7 @@ public class BookingController {
     private final BookingMapper bookingMapper;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasRole('USER')")
     @Operation(
             summary = "Semua data booking",
             description = "Mendapatkan semua data booking user yang sedang login"
@@ -50,7 +50,7 @@ public class BookingController {
     }
 
     @GetMapping("{id}")
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasRole('USER')")
     @Operation(
             summary = "Data booking",
             description = "Mendapatkan data booking berdasarkan ID"
@@ -61,7 +61,7 @@ public class BookingController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasRole('USER')")
     @Operation(
             summary = "Buat booking",
             description = "Membuat booking baru"

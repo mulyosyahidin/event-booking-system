@@ -3,6 +3,7 @@ package com.sinaukoding.martinms.event_booking_system.repository;
 import com.sinaukoding.martinms.event_booking_system.entity.Booking;
 import com.sinaukoding.martinms.event_booking_system.entity.Event;
 import com.sinaukoding.martinms.event_booking_system.entity.User;
+import com.sinaukoding.martinms.event_booking_system.model.enums.BookingStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,4 +21,6 @@ public interface BookingRepository extends JpaRepository<Booking, String>, JpaSp
     Optional<Booking> findByKodeBooking(String kodeBooking);
 
     Page<Booking> findAllByEvent(Event event, Pageable pageable);
+
+    int countByStatus(BookingStatus bookingStatus);
 }

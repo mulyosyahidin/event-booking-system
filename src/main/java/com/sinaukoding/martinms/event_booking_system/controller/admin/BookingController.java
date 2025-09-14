@@ -22,7 +22,7 @@ public class BookingController {
     private final IBookingService bookingService;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
             summary = "Semua data booking",
             description = "Mendapatkan semua data booking user"
@@ -35,7 +35,7 @@ public class BookingController {
     }
 
     @GetMapping("{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
             summary = "Data booking",
             description = "Mendapatkan data booking berdasarkan ID"

@@ -29,6 +29,7 @@
 | 24 | POST        | `/midtrans/callback`          | ❌              | -     |
 | 25 | GET         | `/admin/bookings`             | ✅              | Admin |
 | 26 | GET         | `/admin/bookings/{id}`        | ✅              | Admin |
+| 27 | GET         | `/admin/overview`             | ✅              | Admin |
 
 ### User
 User terdiri dari dua role, yaitu `Admin` dan `User`, dimana `Admin` berperan untuk menambahkan data sedangkan `User` sebagai pembeli.
@@ -40,3 +41,16 @@ User `Admin` dibuat saat aplikasi _start up_ dengan data:
 
 ### User
 User dapat mendaftar melalui _endpoint_ `/auth/register`.
+
+## Profile
+### Development
+- base url: `http://localhost:8080`
+
+### Staging
+- base url: https://event-booking.codewith.cyou
+- swagger url: https://event-booking.codewith.cyou/swagger-ui/index.html
+
+## Postman
+- [Postman - Collection](./postman/Collection.json)
+- [Environment - Dev](./postman/Environment%20-%20Dev.json)
+- [Environment - Staging](./postman/Environment%20-%20Staging.json)

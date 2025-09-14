@@ -24,4 +24,6 @@ public interface IUserService {
     SimpleMap update(String id, UpdateUserRequestRecord request);
 
     void destroy(String id);
+
+    SimpleMap getOverview();
 }

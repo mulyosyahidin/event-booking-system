@@ -26,7 +26,7 @@ public class EventController {
     private final IEventService eventService;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
             summary = "Semua event",
             description = "Mendapatkan semua event"
@@ -39,7 +39,7 @@ public class EventController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
             summary = "Buat event",
             description = "Membuat event baru"
@@ -49,7 +49,7 @@ public class EventController {
     }
 
     @GetMapping("{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
             summary = "Detail event",
             description = "Mendapatkan detail event berdasarkan id"
@@ -59,7 +59,7 @@ public class EventController {
     }
 
     @PutMapping("{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
             summary = "Update event",
             description = "Mengubah data event berdasarkan id"
@@ -69,7 +69,7 @@ public class EventController {
     }
 
     @DeleteMapping("{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
             summary = "Hapus event",
             description = "Menghapus event berdasarkan id"
@@ -81,7 +81,7 @@ public class EventController {
     }
 
     @GetMapping("{id}/bookings")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
             summary = "Booking event",
             description = "Mendapatkan semua data booking event"

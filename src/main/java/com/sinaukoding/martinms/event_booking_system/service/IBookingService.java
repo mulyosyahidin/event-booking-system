@@ -24,4 +24,6 @@ public interface IBookingService {
     Page<SimpleMap> findAll(AdminBookingFilterRecord filterRecord, Pageable pageable);
 
     SimpleMap findById(String id);
+
+    SimpleMap getOverview();
 }

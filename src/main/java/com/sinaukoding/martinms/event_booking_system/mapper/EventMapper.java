@@ -6,6 +6,7 @@ import com.sinaukoding.martinms.event_booking_system.model.enums.KategoriEvent;
 import com.sinaukoding.martinms.event_booking_system.model.enums.Status;
 import com.sinaukoding.martinms.event_booking_system.model.request.admin.event.CreateEventRequestRecord;
 import com.sinaukoding.martinms.event_booking_system.util.DateUtil;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -13,6 +14,9 @@ import java.time.format.DateTimeFormatter;
 
 @Service
 public class EventMapper {
+
+    @Value("${app.base_url}")
+    private String baseUrl;
 
     public Event requestToEntity(CreateEventRequestRecord request, Status status) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -27,6 +31,7 @@ public class EventMapper {
                 .kategori(KategoriEvent.valueOf(request.kategori()))
                 .harga(request.harga())
                 .kuota(request.kuota())
+                .sisaKuota(request.kuota())
                 .waktuMulai(waktuMulai)
                 .waktuSelesai(waktuSelesai)
                 .status(status)
@@ -38,6 +43,7 @@ public class EventMapper {
 
         simpleMap.add("id", event.getId());
         simpleMap.add("gambar", event.getGambar());
+        simpleMap.add("url_gambar", baseUrl + "/files/view?pathFile=" + event.getGambar());
         simpleMap.add("nama", event.getNama());
         simpleMap.add("deskripsi", event.getDeskripsi());
         simpleMap.add("lokasi", event.getLokasi());

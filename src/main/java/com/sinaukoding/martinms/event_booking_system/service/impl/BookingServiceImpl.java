@@ -136,4 +136,16 @@ public class BookingServiceImpl implements IBookingService {
         return bookingMapper.entityToSimpleMap(booking);
     }
 
+    @Override
+    public SimpleMap getOverview() {
+        SimpleMap data = new SimpleMap();
+
+        data.add("pending", bookingRepository.countByStatus(BookingStatus.PENDING));
+        data.add("batal", bookingRepository.countByStatus(BookingStatus.BATAL));
+        data.add("berhasil", bookingRepository.countByStatus(BookingStatus.BERHASIL));
+        data.add("semua", bookingRepository.count());
+
+        return data;
+    }
+
 }

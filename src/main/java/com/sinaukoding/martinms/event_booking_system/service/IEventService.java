@@ -19,4 +19,6 @@ public interface IEventService {
     void destroy(String id);
 
     void tambahSisaKuota(Event event);
+
+    SimpleMap getOverview();
 }

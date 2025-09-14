@@ -19,4 +19,8 @@ public interface UserRepository extends JpaRepository<User, String>, JpaSpecific
     Optional<User> findByUsernameAndStatus(String username, Status status);
 
     Optional<User> findByIdAndStatus(String id, Status status);
+
+    int countByStatusAndRole(Status status, UserRole userRole);
+
+    int countByRole(UserRole userRole);
 }

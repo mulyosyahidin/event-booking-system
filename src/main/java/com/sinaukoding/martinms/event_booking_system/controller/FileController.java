@@ -26,7 +26,7 @@ public class FileController {
     private final IFileService fileService;
 
     @PostMapping(path = "upload", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
             summary = "Upload file",
             description = "Upload file dengan tipe upload"

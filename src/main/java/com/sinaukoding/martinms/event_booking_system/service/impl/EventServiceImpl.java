@@ -49,7 +49,6 @@ public class EventServiceImpl implements IEventService {
         }
 
         Event event = eventRepository.save(eventMapper.requestToEntity(request, Status.AKTIF));
-        event.setSisaKuota(request.kuota());
 
         return eventMapper.entityToSimpleMap(event);
     }
@@ -121,6 +120,26 @@ public class EventServiceImpl implements IEventService {
     public void tambahSisaKuota(Event event) {
         event.setSisaKuota(event.getSisaKuota() + 1);
         eventRepository.save(event);
+    }
+
+    @Override
+    public SimpleMap getOverview() {
+        SimpleMap data = new SimpleMap();
+
+        SimpleMap count = new SimpleMap();
+        count.add("aktif", eventRepository.countByStatus(Status.AKTIF));
+        count.add("tidakAktif", eventRepository.countByStatus(Status.TIDAK_AKTIF));
+        count.add("semua", eventRepository.count());
+
+        SimpleMap waktu = new SimpleMap();
+        LocalDateTime now = LocalDateTime.now();
+        waktu.add("sudahLewat", eventRepository.countByWaktuSelesaiBefore(now));
+        waktu.add("belumLewat", eventRepository.countByWaktuSelesaiAfter(now));
+
+        data.add("count", count);
+        data.add("waktu", waktu);
+
+        return data;
     }
 
 }

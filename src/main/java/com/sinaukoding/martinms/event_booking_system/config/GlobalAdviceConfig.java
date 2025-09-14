@@ -6,19 +6,17 @@ import com.sinaukoding.martinms.event_booking_system.config.exception.Unauthoriz
 import com.sinaukoding.martinms.event_booking_system.config.exception.ValidationErrorException;
 import com.sinaukoding.martinms.event_booking_system.model.response.BaseResponse;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.InsufficientAuthenticationException;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class GlobalAdviceConfig {
-
-    @ExceptionHandler({RuntimeException.class, Exception.class})
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public BaseResponse<?> handleException(Exception e) {
-        return BaseResponse.error("Terjadi kesalahan tidak terduga", e.getMessage());
-    }
 
     @ExceptionHandler({HttpMessageNotReadableException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -54,6 +52,26 @@ public class GlobalAdviceConfig {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public BaseResponse<?> handleResourceNotFoundException(ResourceNotFoundException e) {
         return BaseResponse.notFound(e.getMessage());
+    }
+
+    @ExceptionHandler({
+            AuthorizationDeniedException.class,
+            AccessDeniedException.class
+    })
+    public ResponseEntity<BaseResponse<?>> handleAccessDenied(Exception ex) {
+        if (ex.getCause() instanceof InsufficientAuthenticationException) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(BaseResponse.unauthorizedAccess(ex.getMessage()));
+        }
+
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                .body(BaseResponse.forbiddenAccess(ex.getMessage()));
+    }
+
+    @ExceptionHandler({RuntimeException.class, Exception.class})
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public BaseResponse<?> handleException(Exception e) {
+        return BaseResponse.error("Terjadi kesalahan tidak terduga", e.getMessage());
     }
 
 }

@@ -23,7 +23,7 @@ public class UserController {
     private final IUserService userService;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
             summary = "Semua users",
             description = "Mendapatkan semua users"
@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @GetMapping("{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
             summary = "Detail user",
             description = "Mendapatkan detail user berdasarkan id"
@@ -46,7 +46,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
             summary = "Update user",
             description = "Mengubah data user berdasarkan id"
@@ -56,7 +56,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(
             summary = "Hapus user",
             description = "Menghapus user berdasarkan id"

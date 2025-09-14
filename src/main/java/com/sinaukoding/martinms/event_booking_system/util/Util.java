@@ -31,4 +31,26 @@ public class Util {
         }
     }
 
+    public static String maskString(String str) {
+        return maskString(str, 3);
+    }
+
+    public static String maskString(String str, int max) {
+        if (str == null) {
+            return null;
+        }
+
+        if (max < 0) {
+            throw new IllegalArgumentException("max tidak boleh negatif");
+        }
+
+        if (str.length() <= max) {
+            return str;
+        }
+
+        String prefix = str.substring(0, max);
+        String mask = "*".repeat(str.length() - max);
+        return prefix + mask;
+    }
+
 }
