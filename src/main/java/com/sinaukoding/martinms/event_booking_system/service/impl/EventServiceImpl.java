@@ -117,4 +117,10 @@ public class EventServiceImpl implements IEventService {
         eventRepository.save(event);
     }
 
+    @Override
+    public void tambahSisaKuota(Event event) {
+        event.setSisaKuota(event.getSisaKuota() + 1);
+        eventRepository.save(event);
+    }
+
 }

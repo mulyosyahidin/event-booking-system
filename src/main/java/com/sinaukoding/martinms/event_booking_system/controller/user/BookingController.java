@@ -1,5 +1,7 @@
 package com.sinaukoding.martinms.event_booking_system.controller.user;
 
+import com.sinaukoding.martinms.event_booking_system.entity.Booking;
+import com.sinaukoding.martinms.event_booking_system.mapper.BookingMapper;
 import com.sinaukoding.martinms.event_booking_system.model.request.user.booking.CreateBookingRequestRecord;
 import com.sinaukoding.martinms.event_booking_system.model.response.BaseResponse;
 import com.sinaukoding.martinms.event_booking_system.service.IBookingService;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 public class BookingController {
 
     private final IBookingService bookingService;
+    private final BookingMapper bookingMapper;
 
     @GetMapping
     @PreAuthorize("hasAuthority('USER')")
@@ -34,6 +37,16 @@ public class BookingController {
             @PageableDefault(direction = Sort.Direction.ASC, sort = "modifiedDate")
             @Parameter(hidden = true) Pageable pageable) {
         return BaseResponse.ok("Berhasil mendapatkan data booking", bookingService.findAllByUser(userDetails.getUsername(), pageable));
+    }
+
+    @GetMapping("data")
+    @Operation(
+            summary = "Data booking",
+            description = "Mendapatkan data booking berdasarkan kode booking (order id)"
+    )
+    public BaseResponse<?> data(@RequestParam("order_id") String orderId) {
+        Booking dataBooking = bookingService.findByKodeBooking(orderId);
+        return BaseResponse.ok("Seharusnya redirect dari Midtrans dialihkan ke website front-end aplikasi, tapi karena tidak ada front-end nya, kesini saja dulu...", bookingMapper.entityToSimpleMap(dataBooking));
     }
 
     @GetMapping("{id}")

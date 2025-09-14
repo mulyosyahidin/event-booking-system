@@ -1,6 +1,7 @@
 package com.sinaukoding.martinms.event_booking_system.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sinaukoding.martinms.event_booking_system.model.enums.BookingStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -46,5 +47,9 @@ public class Booking extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     BookingStatus status;
+
+    @OneToOne(mappedBy = "booking", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Pembayaran pembayaran;
 
 }

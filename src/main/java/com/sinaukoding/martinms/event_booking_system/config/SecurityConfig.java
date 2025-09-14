@@ -35,6 +35,8 @@ public class SecurityConfig {
                         .requestMatchers("/auth/register").permitAll()
                         .requestMatchers("/files/view").permitAll()
                         .requestMatchers("/users/events/**").permitAll()
+                        .requestMatchers("/users/bookings/data").permitAll()
+                        .requestMatchers("/midtrans/callback").permitAll()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(ex -> ex

@@ -24,6 +24,8 @@
 | 19 | GET         | `/users/bookings`      | ✅              | User  |
 | 20 | GET         | `/users/bookings/{id}` | ✅              | User  |
 | 21 | POST        | `/users/bookings`      | ✅              | User  |
+| 22 | GET         | `/users/bookings/data` | ❌              | -     |
+| 23 | POST        | `/midtrans/callback`   | ❌              | -     |
 
 ### User
 User terdiri dari dua role, yaitu `Admin` dan `User`, dimana `Admin` berperan untuk menambahkan data sedangkan `User` sebagai pembeli.

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class BookingMapper {
 
+    private final PembayaranMapper pembayaranMapper;
     private final UserMapper userMapper;
     private final EventMapper eventMapper;
 
@@ -26,6 +27,7 @@ public class BookingMapper {
         simpleMap.put("status", booking.getStatus());
         simpleMap.put("user", userMapper.entityToSimpleMap(booking.getUser()));
         simpleMap.put("event", eventMapper.entityToSimpleMap(booking.getEvent()));
+        simpleMap.put("pembayaran", pembayaranMapper.entityToSimpleMap(booking.getPembayaran()));
 
         return simpleMap;
     }

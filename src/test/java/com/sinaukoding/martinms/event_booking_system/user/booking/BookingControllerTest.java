@@ -1,6 +1,8 @@
 package com.sinaukoding.martinms.event_booking_system.user.booking;
 
 import com.sinaukoding.martinms.event_booking_system.controller.user.BookingController;
+import com.sinaukoding.martinms.event_booking_system.entity.Booking;
+import com.sinaukoding.martinms.event_booking_system.mapper.BookingMapper;
 import com.sinaukoding.martinms.event_booking_system.model.app.SimpleMap;
 import com.sinaukoding.martinms.event_booking_system.model.request.user.booking.CreateBookingRequestRecord;
 import com.sinaukoding.martinms.event_booking_system.model.response.BaseResponse;
@@ -26,6 +28,9 @@ class BookingControllerTest {
 
     @Mock
     private IBookingService bookingService;
+
+    @Mock
+    private BookingMapper bookingMapper;
 
     @InjectMocks
     private BookingController bookingController;
@@ -83,6 +88,29 @@ class BookingControllerTest {
         assertEquals("BOOK123", ((SimpleMap) response.getData()).get("kodeBooking"));
 
         verify(bookingService).create("martin", request);
+    }
+
+    @Test
+    void data_Success() {
+        Booking mockBooking = new Booking();
+        mockBooking.setId("1");
+        mockBooking.setKodeBooking("BOOK123");
+
+        when(bookingService.findByKodeBooking("BOOK123")).thenReturn(mockBooking);
+        when(bookingMapper.entityToSimpleMap(mockBooking)).thenReturn(bookingData); // 👈 tambahan
+
+        BaseResponse<?> response = bookingController.data("BOOK123");
+
+        assertNotNull(response);
+        assertEquals(
+                "Seharusnya redirect dari Midtrans dialihkan ke website front-end aplikasi, tapi karena tidak ada front-end nya, kesini saja dulu...",
+                response.getMessage()
+        );
+        assertNotNull(response.getData());
+        assertEquals("BOOK123", ((SimpleMap) response.getData()).get("kodeBooking"));
+
+        verify(bookingService).findByKodeBooking("BOOK123");
+        verify(bookingMapper).entityToSimpleMap(mockBooking);
     }
 
 }
