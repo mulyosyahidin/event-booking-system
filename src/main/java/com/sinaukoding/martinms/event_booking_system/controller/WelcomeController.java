@@ -15,6 +15,9 @@ public class WelcomeController {
     @Value("${spring.profiles.active:default}")
     private String activeProfile;
 
+    @Value("${app.base_url}")
+    private String baseUrl;
+
     @GetMapping
     @Operation(
             summary = "Selamat Datang",
@@ -22,7 +25,9 @@ public class WelcomeController {
     )
     public BaseResponse<?> welcome() {
         SimpleMap data = new SimpleMap();
+
         data.put("activeProfile", activeProfile);
+        data.put("baseUrl", baseUrl);
 
         return BaseResponse.ok("Selamat datang di Event Booking System", data);
     }

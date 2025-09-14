@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.sinaukoding.martinms</groupId>
 	<artifactId>event-booking-system</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>event-booking-system</name>
 	<description>Tugas akhir Sinau Koding PLUS</description>
 	<url/>
@@ -179,6 +179,16 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>3.4.6</version>
+				<configuration>
+					<to>
+						<image>martinms20/${project.artifactId}:${project.version}</image>
+					</to>
 				</configuration>
 			</plugin>
 		</plugins>

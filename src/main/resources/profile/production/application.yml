@@ -1,0 +1,60 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+        enable_lazy_load_no_trans: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:production}
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  web:
+    cors:
+      mappings:
+        "[/**]":
+          allowed-origins:
+            - "https://event-booking.codewith.cyou"
+          allowed-methods:
+            - GET
+            - POST
+            - PUT
+            - DELETE
+            - OPTIONS
+          allow-credentials: true
+          allowed-headers: "*"
+          exposed-headers: "*"
+
+app:
+  upload-directory: uploads
+  base_url: ${APP_BASE_URL}
+
+jwt:
+  secret: ${JWT_SECRET}
+
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
+
+payment:
+  fee: 5000
+  midtrans:
+    merchant_id: ${PAYMENT_MIDTRANS_MERCHANT_ID}
+    client_key: ${PAYMENT_MIDTRANS_CLIENT_KEY}
+    server_key: ${PAYMENT_MIDTRANS_SERVER_KEY}
+    production: ${PAYMENT_MIDTRANS_IS_PRODUCTION}

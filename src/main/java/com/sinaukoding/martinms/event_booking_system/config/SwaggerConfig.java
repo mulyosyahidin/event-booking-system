@@ -26,12 +26,12 @@ import io.swagger.v3.oas.annotations.servers.Server;
         ),
         servers = {
                 @Server(
-                        description = "Development",
-                        url = "http://localhost:8080"
-                ),
-                @Server(
                         description = "Staging",
                         url = "https://event-booking.codewith.cyou"
+                ),
+                @Server(
+                        description = "Development",
+                        url = "http://localhost:8080"
                 )
         },
         security = {
