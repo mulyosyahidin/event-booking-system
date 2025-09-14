@@ -1,7 +1,7 @@
 package com.sinaukoding.martinms.event_booking_system.service;
 
 import com.sinaukoding.martinms.event_booking_system.model.app.SimpleMap;
-import com.sinaukoding.martinms.event_booking_system.model.request.event.EventRequest;
+import com.sinaukoding.martinms.event_booking_system.model.request.admin.event.EventRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

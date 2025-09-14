@@ -1,4 +1,4 @@
-package com.sinaukoding.martinms.event_booking_system.model.request.event;
+package com.sinaukoding.martinms.event_booking_system.model.request.admin.event;
 
 import com.sinaukoding.martinms.event_booking_system.model.enums.KategoriEvent;
 import jakarta.validation.constraints.*;

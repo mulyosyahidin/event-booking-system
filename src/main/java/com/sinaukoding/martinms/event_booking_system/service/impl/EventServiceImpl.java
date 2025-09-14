@@ -12,7 +12,7 @@ import com.sinaukoding.martinms.event_booking_system.model.app.AppPage;
 import com.sinaukoding.martinms.event_booking_system.model.app.SimpleMap;
 import com.sinaukoding.martinms.event_booking_system.model.enums.KategoriEvent;
 import com.sinaukoding.martinms.event_booking_system.model.enums.Status;
-import com.sinaukoding.martinms.event_booking_system.model.request.event.EventRequest;
+import com.sinaukoding.martinms.event_booking_system.model.request.admin.event.EventRequest;
 import com.sinaukoding.martinms.event_booking_system.repository.EventRepository;
 import com.sinaukoding.martinms.event_booking_system.service.IEventService;
 import com.sinaukoding.martinms.event_booking_system.service.app.IValidatorService;

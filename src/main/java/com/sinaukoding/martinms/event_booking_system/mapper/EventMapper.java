@@ -4,7 +4,7 @@ import com.sinaukoding.martinms.event_booking_system.entity.Event;
 import com.sinaukoding.martinms.event_booking_system.model.app.SimpleMap;
 import com.sinaukoding.martinms.event_booking_system.model.enums.KategoriEvent;
 import com.sinaukoding.martinms.event_booking_system.model.enums.Status;
-import com.sinaukoding.martinms.event_booking_system.model.request.event.EventRequest;
+import com.sinaukoding.martinms.event_booking_system.model.request.admin.event.EventRequest;
 import com.sinaukoding.martinms.event_booking_system.util.DateUtil;
 import org.springframework.stereotype.Service;
 

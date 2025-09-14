@@ -15,6 +15,10 @@
 | 10 | POST        | `/admin/events`      | ✅              | Admin |
 | 11 | PUT         | `/admin/events/{id}` | ✅              | Admin |
 | 12 | DELETE      | `/admin/events/{id}` | ✅              | Admin |
+| 13 | GET         | `/admin/users`       | ✅              | Admin |
+| 14 | GET         | `/admin/users/{id}`  | ✅              | Admin |
+| 15 | PUT         | `/admin/users/{id}`  | ✅              | Admin |
+| 16 | DELETE      | `/admin/users/{id}`  | ✅              | Admin |
 
 ### User
 User terdiri dari dua role, yaitu `Admin` dan `User`, dimana `Admin` berperan untuk menambahkan data sedangkan `User` sebagai pembeli.

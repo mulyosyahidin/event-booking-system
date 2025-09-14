@@ -1,10 +1,10 @@
-package com.sinaukoding.martinms.event_booking_system.admin.events;
+package com.sinaukoding.martinms.event_booking_system.admin.event;
 
 import com.sinaukoding.martinms.event_booking_system.config.GlobalAdviceConfig;
 import com.sinaukoding.martinms.event_booking_system.config.exception.ResourceNotFoundException;
 import com.sinaukoding.martinms.event_booking_system.controller.admin.EventController;
 import com.sinaukoding.martinms.event_booking_system.model.app.SimpleMap;
-import com.sinaukoding.martinms.event_booking_system.model.request.event.EventRequest;
+import com.sinaukoding.martinms.event_booking_system.model.request.admin.event.EventRequest;
 import com.sinaukoding.martinms.event_booking_system.model.response.BaseResponse;
 import com.sinaukoding.martinms.event_booking_system.service.IEventService;
 import org.junit.jupiter.api.BeforeEach;

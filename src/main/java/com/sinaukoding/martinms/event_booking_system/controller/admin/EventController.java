@@ -1,7 +1,7 @@
 package com.sinaukoding.martinms.event_booking_system.controller.admin;
 
 import com.sinaukoding.martinms.event_booking_system.model.app.SimpleMap;
-import com.sinaukoding.martinms.event_booking_system.model.request.event.EventRequest;
+import com.sinaukoding.martinms.event_booking_system.model.request.admin.event.EventRequest;
 import com.sinaukoding.martinms.event_booking_system.model.response.BaseResponse;
 import com.sinaukoding.martinms.event_booking_system.service.IEventService;
 import io.swagger.v3.oas.annotations.Operation;
