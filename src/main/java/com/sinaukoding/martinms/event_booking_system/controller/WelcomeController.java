@@ -1,12 +1,9 @@
 package com.sinaukoding.martinms.event_booking_system.controller;
 
-import com.sinaukoding.martinms.event_booking_system.config.MidtransProperties;
 import com.sinaukoding.martinms.event_booking_system.model.app.SimpleMap;
 import com.sinaukoding.martinms.event_booking_system.model.response.BaseResponse;
-import com.sinaukoding.martinms.event_booking_system.util.Util;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

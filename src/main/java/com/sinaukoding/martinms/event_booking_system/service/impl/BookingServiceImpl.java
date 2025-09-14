@@ -22,6 +22,7 @@ import com.sinaukoding.martinms.event_booking_system.service.IPembayaranService;
 import com.sinaukoding.martinms.event_booking_system.service.app.IValidatorService;
 import com.sinaukoding.martinms.event_booking_system.util.FilterUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,9 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class BookingServiceImpl implements IBookingService {
+
+    @Value("${payment.midtrans.merchant_id}")
+    private String merchantId;
 
     private final BookingRepository bookingRepository;
     private final EventRepository eventRepository;
@@ -64,6 +68,10 @@ public class BookingServiceImpl implements IBookingService {
 
     @Override
     public SimpleMap create(String username, CreateBookingRequestRecord request) {
+        if (merchantId.isBlank()) {
+            throw new RuntimeException("Anda belum melakukan konfigurasi Midtrans, booking tidak dapat dilakukan");
+        }
+
         validatorService.validator(request);
 
         User user = userRepository.findByUsernameAndStatus(username, Status.AKTIF)

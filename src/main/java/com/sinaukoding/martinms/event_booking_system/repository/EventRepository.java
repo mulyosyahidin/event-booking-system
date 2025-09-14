@@ -1,7 +1,6 @@
 package com.sinaukoding.martinms.event_booking_system.repository;
 
 import com.sinaukoding.martinms.event_booking_system.entity.Event;
-import com.sinaukoding.martinms.event_booking_system.model.enums.BookingStatus;
 import com.sinaukoding.martinms.event_booking_system.model.enums.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

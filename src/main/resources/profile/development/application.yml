@@ -49,7 +49,7 @@ app:
 payment:
   fee: 5000
   midtrans:
-    merchant_id: ${MIDTRANS_MERCHANT_ID}
-    client_key: ${MIDTRANS_CLIENT_KEY}
-    server_key: ${MIDTRANS_SERVER_KEY}
+    merchant_id: ${MIDTRANS_MERCHANT_ID:}
+    client_key: ${MIDTRANS_CLIENT_KEY:}
+    server_key: ${MIDTRANS_SERVER_KEY:}
     production: ${MIDTRANS_PRODUCTION:false}
